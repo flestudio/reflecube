@@ -1,5 +1,48 @@
-.app {
+.page {
   display: grid;
-  place-items: center;
+  grid-template-rows: 1fr auto;
   min-height: 100dvh;
+}
+
+.app {
+  width: 100%;
+  max-width: 45rem;
+  margin: 1rem auto;
+  padding: 0 1rem;
+}
+
+.header {
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgb(255 255 255 / 12%);
+}
+
+.title {
+  margin: 0 0 0 0.5rem;
+  font-size: 2.125rem;
+  font-weight: 400;
+  line-height: 1.235;
+
+  & > button {
+    padding: 0;
+    border: none;
+    background: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+  }
+}
+
+.footer {
+  padding-bottom: 0.5rem;
+  color: #586270;
+  text-align: center;
+
+  & > p {
+    margin: 0;
+  }
+
+  & a {
+    color: inherit;
+  }
 }

@@ -1,0 +1,95 @@
+.top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 32.65rem;
+  padding: 1rem;
+  border-radius: 4px;
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.logo {
+  width: 5rem;
+  height: 5rem;
+  margin-top: 3rem;
+}
+
+.title {
+  margin: 2rem 0 0;
+  font-size: 3rem;
+  font-weight: 400;
+  line-height: 1.167;
+}
+
+.date {
+  display: flex;
+  align-items: center;
+  width: 14rem;
+  height: 2.5rem;
+  margin-top: 2rem;
+  border: 1px solid rgb(255 255 255 / 23%);
+  border-radius: 4px;
+
+  &:hover {
+    border-color: var(--text);
+  }
+
+  &:focus-within {
+    border-color: var(--cyan);
+  }
+}
+
+.picker {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding: 0 0 0 0.875rem;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  color-scheme: dark;
+}
+
+.random {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+
+  &:hover {
+    background: rgb(255 255 255 / 8%);
+  }
+
+  & > svg {
+    width: 1.5rem;
+    fill: var(--text);
+  }
+}
+
+.play {
+  width: 10rem;
+  height: 2.625rem;
+  margin-top: 3rem;
+  border: none;
+  border-radius: 4px;
+  background: var(--text);
+  box-shadow: var(--shadow);
+  color: #2a3648;
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--cyan);
+  }
+}

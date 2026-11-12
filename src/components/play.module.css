@@ -1,0 +1,146 @@
+.play {
+  display: grid;
+  gap: 1rem;
+  user-select: none;
+}
+
+.board,
+.actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 4px;
+  background: var(--paper);
+  box-shadow: var(--shadow);
+
+  @media (width < 44rem) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.stage {
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 4px solid var(--text);
+  border-radius: 2px;
+  background: var(--frame);
+  touch-action: none;
+  cursor: grab;
+
+  &[data-holding="true"] {
+    cursor: grabbing;
+  }
+
+  [data-solved="true"] > & {
+    pointer-events: none;
+  }
+}
+
+.info {
+  display: grid;
+  order: 1;
+  align-content: center;
+  justify-items: center;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+
+  [data-solved="true"] > & {
+    background: linear-gradient(135deg, var(--yellow) 15%, #778395 50%, var(--cyan) 85%);
+  }
+
+  @media (width < 44rem) {
+    order: 0;
+    padding: 1rem;
+    aspect-ratio: auto;
+  }
+}
+
+.timer,
+.state,
+.date {
+  width: 12rem;
+  margin: 0;
+  text-align: center;
+}
+
+.timer {
+  padding-top: 0.5rem;
+  border: 1px solid #d9dde0;
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+  font-size: 3rem;
+  line-height: 1.4;
+}
+
+.state {
+  height: 2rem;
+  border-radius: 0 0 4px 4px;
+  background: #d9dde0;
+  color: #778395;
+  font-size: 1.25rem;
+  line-height: 2rem;
+
+  [data-solved="true"] & {
+    background: var(--text);
+  }
+}
+
+.date {
+  margin-top: 2rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--text);
+  font-size: 2.125rem;
+  line-height: 1.235;
+}
+
+.inventory {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  order: 2;
+
+  [data-solved="true"] > & {
+    display: none;
+  }
+}
+
+.slot {
+  min-width: 0;
+  aspect-ratio: 1;
+  padding: 0;
+  overflow: hidden;
+  border: 4px solid var(--wall);
+  border-radius: 2px;
+  background: var(--tray);
+  touch-action: none;
+  cursor: grab;
+
+  &[aria-disabled="true"] {
+    cursor: default;
+  }
+
+  & > div {
+    pointer-events: none;
+  }
+}
+
+.action {
+  height: 2.625rem;
+  border: 1px solid var(--text);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--cyan);
+  }
+}

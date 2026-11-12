@@ -1,0 +1,15 @@
+{
+  "short_name": "RefleCube",
+  "name": "RefleCube",
+  "icons": [
+    {
+      "src": "icon.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#22272e",
+  "background_color": "#22272e"
+}
