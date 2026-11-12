@@ -1,0 +1,24 @@
+savePrefix: ""
+
+catalog:
+  vite: npm:@voidzero-dev/vite-plus-core@1.6.0
+  vite-plus: 1.6.0
+
+overrides:
+  vite@*: "catalog:"
+
+allowBuilds:
+  esbuild: false
+  workerd: false
+
+minimumReleaseAgeExclude:
+  - "@cloudflare/build-output-utils@0.9.13"
+  - "@cloudflare/config@0.32.0"
+  - "@cloudflare/runtime-types@0.1.26 || 0.1.27"
+  - "@cloudflare/vite-plugin@2.0.0-beta.v.16"
+  - cf@1.0.0-beta.30
+  - miniflare@5.20261110.1-beta || 5.20261110.2-beta
+
+peerDependencyRules:
+  allowAny:
+    - vite

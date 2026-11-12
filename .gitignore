@@ -1,0 +1,7 @@
+.direnv/
+.claude/skills/
+
+node_modules/
+.cloudflare/
+
+.dev.vars

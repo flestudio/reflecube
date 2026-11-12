@@ -1,0 +1,86 @@
+{
+  "nodes": {
+    "agent-skills": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794456227,
+        "narHash": "sha256-qu7S1arVl+Q6H/yZhJ2VdeDY/kBxY8mK8m6U49M0alk=",
+        "owner": "Kyure-A",
+        "repo": "agent-skills-nix",
+        "rev": "93a02cb60eda167de8c5baa085e4a2bcfc71b885",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Kyure-A",
+        "repo": "agent-skills-nix",
+        "type": "github"
+      }
+    },
+    "cloudflare-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1794310893,
+        "narHash": "sha256-m/2XzXQ6/gGzeWrdFsnUy7OjHAvKb+a0Q4NjZ868Bdc=",
+        "owner": "cloudflare",
+        "repo": "skills",
+        "rev": "cbf893b954222276bf1af57e5f23379231e0efb9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cloudflare",
+        "repo": "skills",
+        "type": "github"
+      }
+    },
+    "nix-vite-plus": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794249012,
+        "narHash": "sha256-ZV8HuqwsZzo72k4woQG2LbtDpGGlYBoMtWPTQNYxono=",
+        "owner": "ryoppippi",
+        "repo": "nix-vite-plus",
+        "rev": "39c1926ef3cc8d09000c426915b627f0b9dceeaf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ryoppippi",
+        "repo": "nix-vite-plus",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1794386569,
+        "narHash": "sha256-x9sADJvoVG0L6RejZB+/BB4YiGZFBZrfTlhF4uBq1tQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "d4f25a3e562008648d45bcf2d70bcc7422cad84e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "agent-skills": "agent-skills",
+        "cloudflare-skills": "cloudflare-skills",
+        "nix-vite-plus": "nix-vite-plus",
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
