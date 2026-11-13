@@ -2,7 +2,7 @@ import { Edges, Line, OrbitControls } from "@react-three/drei";
 import type { ThreeEvent } from "@react-three/fiber";
 import type { Dispatch, FC } from "react";
 
-import { type Action, type Game, traceLasers } from "../puzzle/game";
+import { type Action, type Game, traceLasers, withGhost } from "../puzzle/game";
 import { minoCellsAt } from "../puzzle/mino";
 import { type Vec3, equals, keyOf } from "../puzzle/vector";
 import { portToWorld, toWorld } from "../scene/space";
@@ -22,7 +22,8 @@ type BoardSceneProps = {
 export const BoardScene: FC<BoardSceneProps> = ({ game, solved, ghost, dispatch }) => {
   const { puzzle, positions, held } = game;
   const { size } = puzzle;
-  const paths = traceLasers(game);
+  const shown = withGhost(game, ghost);
+  const paths = traceLasers(shown);
   const heldMino = held === undefined ? undefined : puzzle.minos.at(held);
 
   const lasersThrough = (cell: Vec3) => {
@@ -31,6 +32,11 @@ export const BoardScene: FC<BoardSceneProps> = ({ game, solved, ghost, dispatch 
 
   const lasersReaching = (port: Vec3) => {
     return paths.flatMap(({ exit }, i) => (equals(exit, port) ? [i] : []));
+  };
+
+  const litOf = (index: number, anchor: Vec3) => {
+    const cells = minoCellsAt(puzzle.minos.at(index) ?? [], anchor);
+    return cells.map(({ position }) => lasersThrough(position));
   };
 
   const pickUp = (index: number) => (event: ThreeEvent<PointerEvent>) => {
@@ -69,18 +75,16 @@ export const BoardScene: FC<BoardSceneProps> = ({ game, solved, ghost, dispatch 
         const anchor = positions.at(i);
         if (anchor === undefined) return null;
 
-        const lit = minoCellsAt(mino, anchor).map(({ position }) => lasersThrough(position));
-
         return (
           <group key={i} position={toWorld(anchor, size)} onPointerDown={pickUp(i)}>
-            <MinoMesh mino={mino} lit={lit} ghost={false} />
+            <MinoMesh mino={mino} lit={litOf(i, anchor)} ghost={false} />
           </group>
         );
       })}
 
-      {heldMino !== undefined && ghost !== undefined && (
+      {held !== undefined && heldMino !== undefined && ghost !== undefined && (
         <group position={toWorld(ghost, size)}>
-          <MinoMesh mino={heldMino} lit={[]} ghost />
+          <MinoMesh mino={heldMino} lit={litOf(held, ghost)} ghost />
         </group>
       )}
 

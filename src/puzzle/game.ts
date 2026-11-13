@@ -44,6 +44,11 @@ export const canPlace = (game: Game, index: number, anchor: Vec3) => {
   });
 };
 
+export const withGhost = (game: Game, ghost: Vec3 | undefined) => {
+  if (game.held === undefined || ghost === undefined) return game;
+  return { ...game, positions: game.positions.with(game.held, ghost) };
+};
+
 export const traceLasers = (game: Game) => {
   const board = boardOf(game);
   return game.puzzle.lasers.map(({ start }) => traceLaser(board, start, game.puzzle.size));

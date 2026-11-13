@@ -1,7 +1,16 @@
 import { describe, expect, test } from "vite-plus/test";
 
 import type { Tile } from "./board";
-import { type Action, type Game, boardOf, canPlace, createGame, isSolved, reduce } from "./game";
+import {
+  type Action,
+  type Game,
+  boardOf,
+  canPlace,
+  createGame,
+  isSolved,
+  reduce,
+  withGhost,
+} from "./game";
 import type { Puzzle } from "./generate";
 import { mirrorBetween } from "./mirror";
 import { vec3 } from "./vector";
@@ -120,5 +129,20 @@ describe("isSolved", () => {
 
   test("fails while a mino is held", () => {
     expect(isSolved({ ...placed(...PUZZLE.solution), held: 0 })).toBe(false);
+  });
+});
+
+describe("withGhost", () => {
+  test("previews the held mino at the ghost", () => {
+    const game = play({ type: "hold", index: 0 });
+    expect(withGhost(game, vec3(1, 0, 0)).positions).toEqual([vec3(1, 0, 0), undefined]);
+  });
+
+  test("leaves the game alone without a held mino or a ghost", () => {
+    const idle = createGame(PUZZLE);
+    expect(withGhost(idle, vec3(1, 0, 0))).toBe(idle);
+
+    const holding = play({ type: "hold", index: 0 });
+    expect(withGhost(holding, undefined)).toBe(holding);
   });
 });
