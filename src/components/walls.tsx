@@ -13,7 +13,7 @@ type WallsProps = {
 
 export const Walls: FC<WallsProps> = ({ size }) => {
   const half = size / 2;
-  const ticks = [...Array(size + 1)].map((_, i) => i - half);
+  const ticks = [...Array(size - 1)].map((_, i) => i + 1 - half);
   const grid = <meshBasicMaterial color={GRID_COLOR} />;
 
   return DIRECTIONS.map((direction) => (
@@ -30,11 +30,11 @@ export const Walls: FC<WallsProps> = ({ size }) => {
       {ticks.map((tick) => (
         <group key={tick} position={[0, 0, LIFT]}>
           <mesh position={[tick, 0, 0]}>
-            <planeGeometry args={[LINE, size + LINE]} />
+            <planeGeometry args={[LINE, size]} />
             {grid}
           </mesh>
           <mesh position={[0, tick, 0]}>
-            <planeGeometry args={[size + LINE, LINE]} />
+            <planeGeometry args={[size, LINE]} />
             {grid}
           </mesh>
         </group>

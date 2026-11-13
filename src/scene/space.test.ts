@@ -5,6 +5,8 @@ import { mirrorBetween, mirrorNormal } from "../puzzle/mirror";
 import { DIRECTIONS, vec3 } from "../puzzle/vector";
 import {
   facing,
+  grazedSpans,
+  laserPoints,
   mirrorQuaternion,
   portToWorld,
   sizeAlong,
@@ -26,6 +28,54 @@ describe("portToWorld", () => {
   test("puts a port on the face of the cube", () => {
     expect(portToWorld(vec3(-1, 1, 1), 3)).toEqual([-1.5, 0, 0]);
     expect(portToWorld(vec3(2, 3, 0), 3)).toEqual([1, 1.5, -1]);
+  });
+});
+
+describe("laserPoints", () => {
+  test("runs straight from port to port", () => {
+    const cells = [vec3(0, 1, 1), vec3(1, 1, 1), vec3(2, 1, 1)];
+    expect(laserPoints(vec3(-1, 1, 1), { cells, exit: vec3(3, 1, 1) }, 3)).toEqual([
+      [-1.5, 0, 0],
+      [-1, 0, 0],
+      [0, 0, 0],
+      [1, 0, 0],
+      [1.5, 0, 0],
+    ]);
+  });
+
+  test("turns just short of the cell center", () => {
+    const cells = [vec3(0, 1, 1), vec3(1, 1, 1), vec3(1, 2, 1)];
+    expect(laserPoints(vec3(-1, 1, 1), { cells, exit: vec3(1, 3, 1) }, 3)).toEqual([
+      [-1.5, 0, 0],
+      [-1, 0, 0],
+      [-0.06, 0, 0],
+      [0, 0.06, 0],
+      [0, 1, 0],
+      [0, 1.5, 0],
+    ]);
+  });
+});
+
+describe("grazedSpans", () => {
+  const path = { cells: [vec3(0, 1, 1), vec3(1, 1, 1), vec3(2, 1, 1)], exit: vec3(3, 1, 1) };
+  const start = vec3(-1, 1, 1);
+
+  test("spans a mirror the laser slides along", () => {
+    const board = new Map([["1,1,1", mirrorBetween(vec3(0, 1, 0), vec3(0, 0, 1))]]);
+    expect(grazedSpans(start, path, board, 3)).toEqual([
+      [
+        [-0.5, 0, 0],
+        [0.5, 0, 0],
+      ],
+    ]);
+  });
+
+  test("skips empty cells and mirrors that turn the laser", () => {
+    const board = new Map([
+      ["0,1,1", null],
+      ["1,1,1", mirrorBetween(vec3(1, 0, 0), vec3(0, 0, 1))],
+    ]);
+    expect(grazedSpans(start, path, board, 3)).toEqual([]);
   });
 });
 
